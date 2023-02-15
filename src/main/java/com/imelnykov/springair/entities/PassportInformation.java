@@ -13,6 +13,6 @@ public class PassportInformation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String fullName;
-    private String passportNum;
+    private String passportNumber;
     private LocalDateTime expirationDate;
 }
