@@ -22,11 +22,6 @@ public class User {
     @JoinColumn(name = "passport_id")
     private PassportInformation passportInformation;
     @OneToOne
-    @JoinColumn(name = "country_id")
-    private Country country;
-    @OneToOne
     @JoinColumn(name = "contact_id")
     private ContactInformation contactId;
-    @OneToMany(mappedBy = "user")
-    private List<RegisteredFlight> registeredFlights;
 }
