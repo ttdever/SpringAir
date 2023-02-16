@@ -6,10 +6,20 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Getter
+@Setter
 public class Destination {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
