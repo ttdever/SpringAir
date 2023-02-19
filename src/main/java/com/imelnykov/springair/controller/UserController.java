@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.security.Principal;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(path = "${api.prefix}/user")
@@ -34,5 +36,4 @@ public class UserController {
     public ResponseEntity<UserOutDto> addUser(@RequestBody UserInDto userInDto) {
         return ResponseEntity.ok(userService.createUser(userInDto));
     }
-
 }

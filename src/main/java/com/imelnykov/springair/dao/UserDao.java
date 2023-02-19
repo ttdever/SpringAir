@@ -12,7 +12,7 @@ public interface UserDao extends JpaRepository<User, Integer> {
 
     @Query("""
         SELECT u FROM User u
-        JOIN u.contactId c
+        JOIN u.contact c
         WHERE c.email = :email
         """)
     Optional<User> findByEmail(String email);
