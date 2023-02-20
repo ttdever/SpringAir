@@ -14,17 +14,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.security.Principal;
-
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(path = "${api.prefix}/user")
 public class UserController {
     private final UserService userService;
 
-    @GetMapping(path = "/{clientId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<UserOutDto> getUserById(@PathVariable int clientId) {
-        return userService.getUserById(clientId).map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    @GetMapping(path = "/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<UserOutDto> getUserById(@PathVariable int userId) {
+        return userService.getUserById(userId).map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)

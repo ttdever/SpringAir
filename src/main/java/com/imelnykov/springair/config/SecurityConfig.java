@@ -15,8 +15,10 @@ public class SecurityConfig {
                 .requestMatchers("/login*", "/oauth2*").permitAll()
                 .anyRequest().authenticated()
                 .and().authenticationProvider(authenticationProvider())
-                .formLogin()
-                .and().oauth2Login();
+                .httpBasic()
+                .and().formLogin()
+                .and().oauth2Login()
+                .and().csrf().disable();
         return http.build();
     }
 

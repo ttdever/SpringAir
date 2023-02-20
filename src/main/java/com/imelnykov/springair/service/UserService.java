@@ -39,10 +39,4 @@ public class UserService {
     private User mapUserInDtoToUserEntity(UserInDto userInDtoToMap) {
         return modelMapper.map(userInDtoToMap, User.class);
     }
-
-    //GET User by Id
-    //GET User by Email
-    //POST new user
-    //PUT (update) user
-    //DELETE user
 }
