@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th = "http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+    <link th:href = "@{/css/mainPage.css}" rel="stylesheet">
+    <title>Main page</title>
+</head>
+<body>
+<div class="topnav">
+    <a class="active">Main page</a>
+    <a>My flights</a>
+    <a>Available destinations</a>
+    <a sec:authorize="isAuthenticated()" href="/logout">Logout</a>
+    <a sec:authorize="isAnonymous()" href="/login">Login</a>
+</div>
+<h1 sec:authentication="name"></h1>
+</body>
+</html>

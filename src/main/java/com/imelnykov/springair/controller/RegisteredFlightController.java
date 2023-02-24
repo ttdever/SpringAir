@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -45,5 +46,11 @@ public class RegisteredFlightController {
         assignFlightToUser(@RequestParam int userId, @RequestParam int destinationId) {
         System.out.println("Got assign request from user id = " + userId);
         return ResponseEntity.ok(flightService.registerNewFlight(userId, destinationId));
+    }
+
+    @DeleteMapping(path = "/cancel/{flightId}")
+    public ResponseEntity<Void> cancelFlight(@PathVariable int flightId) {
+        flightService.cancelRegisteredFlight(flightId);
+        return ResponseEntity.noContent().build();
     }
 }

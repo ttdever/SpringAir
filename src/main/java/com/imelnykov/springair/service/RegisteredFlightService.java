@@ -73,6 +73,10 @@ public class RegisteredFlightService {
         return mapFlightToFlightOutDto(registeredFlightDao.save(registeredFlight));
     }
 
+    public void cancelRegisteredFlight(int flightId) {
+        registeredFlightDao.deleteById(flightId);
+    }
+
     private RegisteredFlightOutDto mapFlightToFlightOutDto(RegisteredFlight registeredFlight) {
         return mapper.map(registeredFlight, RegisteredFlightOutDto.class);
     }
