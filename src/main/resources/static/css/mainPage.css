@@ -32,3 +32,30 @@ body {
   background-color: #cc9a58;
   color: white;
 }
+
+tr td span {
+    color: white;
+    text-align: center;
+    vertical-align: middle;
+}
+
+tr td {
+    color: white;
+    text-align: center;
+    vertical-align: middle;
+}
+
+tr th {
+    color: white
+}
+
+table {
+    margin: auto;
+}
+
+.center {
+  margin: auto;
+  width: 50%;
+  border: 0px;
+  padding: 10px;
+}

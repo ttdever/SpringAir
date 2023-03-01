@@ -7,12 +7,37 @@
 </head>
 <body>
 <div class="topnav">
-    <a class="active">Main page</a>
-    <a>My flights</a>
+    <a class="active">My flights</a>
     <a>Available destinations</a>
-    <a sec:authorize="isAuthenticated()" href="/logout">Logout</a>
-    <a sec:authorize="isAnonymous()" href="/login">Login</a>
+    <a sec:authorize="isAuthenticated()">Account information</a>>
+    <a style="float: right" sec:authorize="isAuthenticated()" th:text="${email}"></a>
+    <a style="float: right" sec:authorize="isAuthenticated()" href="/logout">Logout</a>
+    <a style="float: right" sec:authorize="isAnonymous()" href="/login">Login</a>
 </div>
-<h1 sec:authentication="name"></h1>
+
+<div sec:authorize="isAuthenticated()" class="center">
+    <table style="border-spacing: 10px;">
+        <thead>
+        <tr th:if="${!flights.empty}">
+            <th> From </th>
+            <th> To </th>
+            <th> Departure time </th>
+            <th> Arrival time </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${flights.empty}">
+            <td colspan="4"> You haven't registered flights </td>
+        </tr>
+        <tr th:each="flight : ${flights}">
+            <td><span th:text="${flight.destination.from.country.countryName} + ' : ' + ${flight.destination.from.codeName}"> From </span></td>
+            <td><span th:text="${flight.destination.to.country.countryName} + ' : ' + ${flight.destination.to.codeName}"> To </span></td>
+            <td><span th:text="${flight.destination.departureTime}"> Departure Time </span></td>
+            <td><span th:text="${flight.destination.arrivalTime}"> Arrival Time </span></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
 </body>
 </html>
