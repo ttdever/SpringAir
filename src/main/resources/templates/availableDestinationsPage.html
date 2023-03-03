@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th = "http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+  <link th:href = "@{/css/mainPage.css}" rel="stylesheet">
+  <title>Main page</title>
+</head>
+<body>
+<div class="topnav">
+  <a href="/">My destinations</a>
+  <a href="/available-destinations" class="active">Available destinations</a>
+  <a sec:authorize="isAuthenticated()" href="/account-info">Account information</a>>
+  <a style="float: right" sec:authorize="isAuthenticated()" th:text="${email}" href="/account-info"></a>
+  <a style="float: right" sec:authorize="isAuthenticated()" href="/logout">Logout</a>
+  <a style="float: right" sec:authorize="isAnonymous()" href="/login">Login</a>
+</div>
+
+<div sec:authorize="isAuthenticated()" class="center">
+  <table style="border-spacing: 10px;">
+    <thead>
+    <tr th:if="${!destinations.empty}">
+      <th> From </th>
+      <th> To </th>
+      <th> Departure date and time </th>
+      <th> Arrival date and time </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${destinations.empty}">
+      <td colspan="4"> There are no available destinations now </td>
+    </tr>
+    <tr th:each="destination : ${destinations}">
+      <td><span th:text="${destination.from.country.countryName} + ' : ' + ${destination.from.codeName}"> From </span></td>
+      <td><span th:text="${destination.to.country.countryName} + ' : ' + ${destination.to.codeName}"> To </span></td>
+      <td><span th:text="${#temporals.format(destination.departureTime, 'yyyy-MM-dd')} + ' at ' + ${#temporals.format(destination.departureTime, 'HH:mm')}"> Departure date and time </span></td>
+      <td><span th:text="${#temporals.format(destination.arrivalTime, 'yyyy-MM-dd')} + ' at ' + ${#temporals.format(destination.arrivalTime, 'HH:mm')}"> Arrival date and time </span></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>

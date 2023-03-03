@@ -12,7 +12,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
             http.authorizeHttpRequests()
-                    .requestMatchers("/login*", "/oauth2*", "/", "/resources/**", "/static/**", "/css/**", "/js/**", "/images/**","/vendor/**","/fonts/**").permitAll()
+                    .requestMatchers("/login*", "/oauth2*", "/", "/resources/**", "/static/**", "/css/**", "/js/**", "/images/**","/vendor/**","/fonts/**","/available-destinations/").permitAll()
                     .anyRequest().authenticated()
                     .and().authenticationProvider(authenticationProvider())
                     .formLogin()

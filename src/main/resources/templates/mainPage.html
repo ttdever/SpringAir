@@ -7,10 +7,10 @@
 </head>
 <body>
 <div class="topnav">
-    <a class="active">My flights</a>
-    <a>Available destinations</a>
-    <a sec:authorize="isAuthenticated()">Account information</a>>
-    <a style="float: right" sec:authorize="isAuthenticated()" th:text="${email}"></a>
+    <a href="/" class="active">My flights</a>
+    <a href="/available-destinations">Available destinations</a>
+    <a sec:authorize="isAuthenticated()" href="/account-info">Account information</a>>
+    <a style="float: right" sec:authorize="isAuthenticated()" th:text="${email}" href="/account-info"></a>
     <a style="float: right" sec:authorize="isAuthenticated()" href="/logout">Logout</a>
     <a style="float: right" sec:authorize="isAnonymous()" href="/login">Login</a>
 </div>
@@ -21,8 +21,8 @@
         <tr th:if="${!flights.empty}">
             <th> From </th>
             <th> To </th>
-            <th> Departure time </th>
-            <th> Arrival time </th>
+            <th> Departure date and time </th>
+            <th> Arrival date and time </th>
         </tr>
         </thead>
         <tbody>
@@ -32,8 +32,8 @@
         <tr th:each="flight : ${flights}">
             <td><span th:text="${flight.destination.from.country.countryName} + ' : ' + ${flight.destination.from.codeName}"> From </span></td>
             <td><span th:text="${flight.destination.to.country.countryName} + ' : ' + ${flight.destination.to.codeName}"> To </span></td>
-            <td><span th:text="${flight.destination.departureTime}"> Departure Time </span></td>
-            <td><span th:text="${flight.destination.arrivalTime}"> Arrival Time </span></td>
+            <td><span th:text="${#temporals.format(flight.destination.departureTime, 'yyyy-MM-dd')} + ' at ' + ${#temporals.format(flight.destination.departureTime, 'HH:mm')}"> Departure date and time </span></td>
+            <td><span th:text="${#temporals.format(flight.destination.arrivalTime, 'yyyy-MM-dd')} + ' at ' + ${#temporals.format(flight.destination.arrivalTime, 'HH:mm')}"> Arrival date and time </span></td>
         </tr>
         </tbody>
     </table>

@@ -1,23 +1,24 @@
 package com.imelnykov.springair.controller;
 
+import com.imelnykov.springair.service.DestinationService;
 import com.imelnykov.springair.service.RegisteredFlightService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
-import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import java.security.Principal;
 import java.util.Map;
 
 @Controller
 public class WebController {
     @Autowired
     private RegisteredFlightService flightService;
+
+    @Autowired
+    private DestinationService destinationService;
 
     @GetMapping("/")
     public String getMainPage(Model model, Authentication authentication) {
@@ -27,6 +28,22 @@ public class WebController {
             model.addAttribute("flights", flightService.getRegisteredFlightsByEmail(email));
         }
         return "mainPage";
+    }
+
+    @GetMapping("/available-destinations")
+    public String getAvailableDestinationsPage(Model model, Authentication authentication) {
+        if(authentication != null) {
+            String email = getEmailFromAuthentication(authentication);
+            model.addAttribute("email", email);
+            model.addAttribute("destinations", destinationService.getAllDestinations());
+        }
+        return "availableDestinationsPage";
+    }
+
+    @GetMapping("/account-info")
+    public String getAccountInformationPage(Model model) {
+        // Add Account Information
+        return "accountInformationPage";
     }
 
     private String getEmailFromAuthentication(Authentication authentication) {
